@@ -13,6 +13,11 @@ From now own, your commits will be identified with authors like:
 You can use as many pairs you want, all you need is keep issuing
 commands to add more authors.
 
+    git pair ended
+
+At the end of your pairing session, the above command will reset
+author names to your global `user.name` configuration on Git.
+
 ## Instalation
 
 You can clone the project where you want to, all you need after

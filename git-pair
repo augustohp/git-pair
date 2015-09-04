@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#vim: et ts=2 sw=2 ft=sh:
+# vim: noexpandtab ts=4 sw=4 ft=sh:
 
 set -e
 set +x
@@ -8,29 +8,67 @@ declare -r PAIR_SEPARATOR=+
 
 function gp_my_name()
 {
-    AUTHOR_NAME=$(git config user.name)
+	GLOBAL_AUTHOR_NAME=$(git config --global user.name)
+	LOCAL_AUTHOR_NAME=$(git config --local user.name)
 
-    echo $AUTHOR_NAME
+	[[ -z "$GLOBAL_AUTHOR_NAME" ]] && { exit 0; }
+	[[ "$LOCAL_AUTHOR_NAME" = "$GLOBAL_AUTHOR_NAME" ]] && { echo $LOCAL_AUTHOR_NAME; exit 0; }
+
+	echo $GLOBAL_AUTHOR_NAME;
 }
 
 function gp_my_email()
 {
-    AUTHOR_EMAIL=$(git config user.email)
+	AUTHOR_EMAIL=$(git config user.email)
 
-    echo $AUTHOR_EMAIL
+	echo $AUTHOR_EMAIL
 }
 
 function gp_add_author()
 {
-    PAIR_NAME=$1
-    [[ -z "$1" ]] && { echo "Pair name is required, like 'John Doe'."; exit 100; }
+	PAIR_NAME=$1
+	[[ -z "$1" ]] && { echo "Pair name is required, like 'John Doe'."; exit 100; }
 
-    MY_NAME=$(git config user.name)
-    PAIR_NAMES="${MY_NAME} ${PAIR_SEPARATOR} ${PAIR_NAME}"
+	CURRENT_AUTHORS=$(git config user.name)
+	PAIR_NAMES="${CURRENT_AUTHORS} ${PAIR_SEPARATOR} ${PAIR_NAME}"
 
-    git config --local user.name "$PAIR_NAMES"
+	git config --local user.name "$PAIR_NAMES"
+	echo "Local authors name now are:" $(git config --local user.name)
 }
 
-[[ -z "$1" ]] && { echo "Usage: git-pair 'John Doe'"; exit 1; }
+function gp_reset_author()
+{
+	MY_NAME=$(gp_my_name)
 
-gp_add_author "$1"
+	[[ -z "$MY_NAME" ]] && { echo "No global Git user, use 'git config --global user.name <your name>'."; exit 101; }
+
+	git config --local user.name "$MY_NAME"
+	echo "Local author name now is:" $(git config --local user.name)
+}
+
+if [ -z "$1" ]; then
+	cat <<-CAT
+	Usage: git pair <author name>
+	       git pair ended
+
+	Arguments:
+	  <author name>       Name of the author you want to pair with, like
+	                       "John Doe" or "Bob Marley".
+	  ended               Resets the author name to your original name,
+	                       defined on your global Git configuration. You can
+	                       also use "finished" as an alternative.
+
+	Bugs on http://github.com/augustohp/git-pair/issues
+CAT
+	exit 1;
+fi
+
+case "$1" in
+	"ended" | "finished" )
+		gp_reset_author
+		;;
+	* )
+		gp_add_author "$1"
+		;;
+esac
+
