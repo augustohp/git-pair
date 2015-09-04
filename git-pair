@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#vim: et ts=2 sw=2 ft=sh:
+
+set -e
+set +x
+
+declare -r PAIR_SEPARATOR=+
+
+function gp_my_name()
+{
+    AUTHOR_NAME=$(git config user.name)
+
+    echo $AUTHOR_NAME
+}
+
+function gp_my_email()
+{
+    AUTHOR_EMAIL=$(git config user.email)
+
+    echo $AUTHOR_EMAIL
+}
+
+function gp_add_author()
+{
+    PAIR_NAME=$1
+    [[ -z "$1" ]] && { echo "Pair name is required, like 'John Doe'."; exit 100; }
+
+    MY_NAME=$(git config user.name)
+    PAIR_NAMES="${MY_NAME} ${PAIR_SEPARATOR} ${PAIR_NAME}"
+
+    git config --local user.name "$PAIR_NAMES"
+}
+
+[[ -z "$1" ]] && { echo "Usage: git-pair 'John Doe'"; exit 1; }
+
+gp_add_author "$1"
