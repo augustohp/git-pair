@@ -47,7 +47,7 @@ function gp_reset_author()
 }
 
 if [ -z "$1" ]; then
-	cat <<-CAT
+	cat 1>&2 <<-CAT
 	Usage: git pair <author name>
 	       git pair ended
 
