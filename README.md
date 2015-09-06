@@ -4,7 +4,7 @@ Simple bash-script allowing pair to be identified on git commits:
 
     $ git pair "Nelson Senna"
 
-From now own, your commits will be identified with authors like:
+From now on, your commits will be identified with authors like:
 
     commit a101286e02117fdafea58742074694138d578948
     Author: Augusto Pascutti + Nelson Senna <augusto@phpsp.org.br>
@@ -18,7 +18,7 @@ commands to add more authors.
 At the end of your pairing session, the above command will reset
 author names to your global `user.name` configuration on Git.
 
-## Instalation
+## Installation
 
 You can clone the project where you want to, all you need after
 is to sym-link the `git-pair` script to your `$PATH`:
