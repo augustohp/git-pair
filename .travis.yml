@@ -1,0 +1,7 @@
+language: c
+sudo: false
+install:
+    - git clone --depth 1 https://github.com/sstephenson/bats.git
+    - chmod a+x git-pair
+script:
+    - PATH="./bats/bin:.:$PATH" bats tests
