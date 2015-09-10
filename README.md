@@ -25,7 +25,7 @@ is to sym-link the `git-pair` script to your `$PATH`:
 
     $ cd <my-src-dir>
     $ git clone http://github.com/augustohp/git-pair
-    $ chmod a+x git-pait/git-pair
+    $ chmod a+x git-pair/git-pair
     $ ln -s <my-src-dir>/git-pair /usr/local/bin
 
 Now you should be able to execute `git pair` anywhere.
