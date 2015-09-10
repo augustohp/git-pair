@@ -1,4 +1,4 @@
-# git-pair
+# git-pair [![Build Status](https://travis-ci.org/augustohp/git-pair.svg)](https://travis-ci.org/augustohp/git-pair)
 
 Simple bash-script allowing pair to be identified on git commits:
 
