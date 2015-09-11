@@ -37,3 +37,12 @@ load git_environment
     assert_failure
     #assert_equals "Git is not installed, moron!" "$output"
 }
+
+@test "Should not pair with an author already existent" {
+    run git-pair "Billie Jean"
+    run git-pair "Billie Jean"
+
+    assert_failure
+    assert_equals "You cannot pair with yourself, can you?" "$output"
+}
+
