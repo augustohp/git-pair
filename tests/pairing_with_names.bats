@@ -15,12 +15,12 @@ load git_environment
     assert_equals "Local authors name now are: Git Pair User + John Doe" "$output"
 }
 
-@test "Pairing with two other user names" {
+@test "Pairing with two other user names order them alphabetically" {
     run git-pair "John Doe"
     run git-pair "Jane Doe"
 
     assert_success
-    assert_equals "Local authors name now are: Git Pair User + John Doe + Jane Doe" "$output"
+    assert_equals "Local authors name now are: Git Pair User + Jane Doe + John Doe" "$output"
 }
 
 @test "Ending a pairing session with 'ended'" {

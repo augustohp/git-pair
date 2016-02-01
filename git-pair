@@ -32,9 +32,19 @@ function gp_add_author()
 	CURRENT_AUTHORS=$(git config user.name)
 	[[ $( echo $CURRENT_AUTHORS | grep -e "$PAIR_NAME" ) != "" ]] && { echo "Author '$PAIR_NAME' already in list!"; exit 102;  }
 
-	PAIR_NAMES="${CURRENT_AUTHORS} ${PAIR_SEPARATOR} ${PAIR_NAME}"
+	ORDERED_PAIR_NAMES_ONELINE=$(
+		echo "${CURRENT_AUTHORS} ${PAIR_SEPARATOR} ${PAIR_NAME}" |
+		tr ${PAIR_SEPARATOR} '\n' |
+		sed 's/^ //g' |
+		sed 's/ $//g' |
+		sort |
+		tr '\n' ${PAIR_SEPARATOR} |
+		sed "s/${PAIR_SEPARATOR}$//g" | 
+		sed "s/${PAIR_SEPARATOR}/ ${PAIR_SEPARATOR} /g"
+	)
 
-	git config --local user.name "$PAIR_NAMES"
+
+	git config --local user.name "$ORDERED_PAIR_NAMES_ONELINE"
 	echo "Local authors name now are:" $(git config --local user.name)
 }
 
