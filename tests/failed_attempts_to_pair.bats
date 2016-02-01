@@ -43,6 +43,6 @@ load git_environment
     run git-pair "Billie Jean"
 
     assert_failure
-    assert_equals "You cannot pair with yourself, can you?" "$output"
+    assert_equals "Author 'Billie Jean' already in list!" "$output"
 }
 

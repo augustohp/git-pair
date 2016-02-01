@@ -30,7 +30,7 @@ function gp_add_author()
 	[[ -z "$1" ]] && { echo "Pair name is required, like 'John Doe'."; exit 100; }
 
 	CURRENT_AUTHORS=$(git config user.name)
-	[[ $( echo $CURRENT_AUTHORS | grep -e "$PAIR_NAME" ) != "" ]] && { echo "You cannot pair with yourself, can you?"; exit 102;  }
+	[[ $( echo $CURRENT_AUTHORS | grep -e "$PAIR_NAME" ) != "" ]] && { echo "Author '$PAIR_NAME' already in list!"; exit 102;  }
 
 	PAIR_NAMES="${CURRENT_AUTHORS} ${PAIR_SEPARATOR} ${PAIR_NAME}"
 
