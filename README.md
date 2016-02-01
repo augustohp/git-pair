@@ -20,7 +20,11 @@ author names to your global `user.name` configuration on Git.
 
 ## Installation
 
-You can clone the project where you want to, all you need after
+One-liner using [Sinister](https://github.com/jamesqo/sinister):
+
+    $ sh <(curl -sSL http://git.io/sinister) --local --url https://git.io/git-pair
+
+Or you can clone the project where you want to, all you need after
 is to sym-link the `git-pair` script to your `$PATH`:
 
     $ cd <my-src-dir>
