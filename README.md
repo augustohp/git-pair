@@ -1,4 +1,5 @@
 # git-pair [![Build Status](https://travis-ci.org/augustohp/git-pair.svg)](https://travis-ci.org/augustohp/git-pair)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Faugustohp%2Fgit-pair.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Faugustohp%2Fgit-pair?ref=badge_shield)
 
 Simple bash-script allowing pair to be identified on git commits:
 
@@ -33,3 +34,7 @@ is to sym-link the `git-pair` script to your `$PATH`:
     $ ln -s <my-src-dir>/git-pair /usr/local/bin
 
 Now you should be able to execute `git pair` anywhere.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Faugustohp%2Fgit-pair.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Faugustohp%2Fgit-pair?ref=badge_large)
